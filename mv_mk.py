@@ -2,20 +2,19 @@
 
 """
 mv_mk.py: este proceso en un inicio estaba hecho en un batch para win7,
-pero despues de que migraron los equipos a win10 e hicieron "ajustes"
+pero despues de que migraron los equipos a win10 e hicieran "ajustes"
 perdimos muchos permisos, incluso algo tan simple como un batch dejo
 de funcionar, si se ejecutaban pero no surtian efecto.
 
 lo que hace este proceso es crear una copia de los archivos en rutas
-especificas, se añadio una tarea programada que a cierta hora por la
-madrugada copiara los archivos.
+especificas, se añadio una tarea programada para que durante la madrugada
+hiciera la copia
 """
 
 import shutil
 import os
 import time
-from datetime import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 fecha=datetime.today().strftime('%Y%m%d')
 dm=timedelta(days=1)
