@@ -16,31 +16,31 @@ from collections import Counter, defaultdict
 from itertools import chain
 from datetime import datetime
 
-fecha=datetime.today().strftime("%Y/%m/%d")
-yr, mes, dia=fecha.split('/')
-r=int(dia) - 1
-d_ayer=mes + str(r)
+fecha = datetime.today().strftime("%Y/%m/%d")
+yr, mes, dia = fecha.split('/')
+r = int(dia) - 1
+d_ayer = mes + str(r)
 
-file_local=r'RESULTADOS\RPT_DIALER_PERFORMANCE_' + d_ayer + '_ENERO.csv'
+file_local = r'RESULTADOS\RPT_DIALER_PERFORMANCE_' + d_ayer + '_ENERO.csv'
 
 for icaro_file in sorted(glob.glob(r'\\192.168.73.23\Tables\NVO72\ICARO_NOC\RPT_DIALER_PERFORMANCE_*[0-9].csv')):
-        infile=icaro_file
+        infile = icaro_file
 
 with open(infile, 'r') as org:
-    lec=csv.reader(org)
-    icaro_org=list(lec)
+    lec = csv.reader(org)
+    icaro_org = list(lec)
 
 with open(file_local, 'r') as sal:
-    lec=csv.reader(sal)
-    icaro_sal=list(lec)
+    lec=  csv.reader(sal)
+    icaro_sal = list(lec)
 
-uno=Counter(n[0] for n in icaro_org)
-dos=Counter(i[0] for i in icaro_sal)
+uno = Counter(n[0] for n in icaro_org)
+dos=  Counter(i[0] for i in icaro_sal)
 
-serv_uno=Counter(n[1] for n in icaro_org)
-serv_dos=Counter(i[1] for i in icaro_sal)
+serv_uno = Counter(n[1] for n in icaro_org)
+serv_dos = Counter(i[1] for i in icaro_sal)
 
-union=defaultdict(list)
+union = defaultdict(list)
 
 def crea_chain(*args):
         for k, v in chain(args[0].items(), args[1].items()):
@@ -50,16 +50,16 @@ def crea_chain(*args):
                 escritor=csv.writer(sl, delimiter='\t')
                 escritor.writerow(
                     ['CONT', 'FECHAS', 'ICARO', 'RESULTADO', 'DIF', 'STATUS'])
-                reg=0
+                reg = 0
                 for fechas, registros in list(sorted(union.items())):
                         reg += 1
-                        op=registros[0] - registros[1]
+                        op = registros[0] - registros[1]
                         if op == 0:
-                                men='OK'
+                                men = 'OK'
                         else:
-                                men='Error'
+                                men = 'Error'
 
-                        data='{:02} {:>15} {:>5} {:>10} {:>10} {:>10}'.format(
+                        data = '{:02} {:>15} {:>5} {:>10} {:>10} {:>10}'.format(
                             reg, fechas, registros[0], registros[1], op, men)
                         escritor.writerow([data])
                 escritor.writerow(['-'*60])

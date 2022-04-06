@@ -15,16 +15,16 @@ import csv
 import os
 from datetime import datetime
 
-fecha=datetime.today().strftime('%d/%m/%Y')
-header=['FECHA_EXCLUSION', 'SIS', 'CLIENTE', 'TEL', 'CODIGO']
+fecha = datetime.today().strftime('%d/%m/%Y')
+header = ['FECHA_EXCLUSION', 'SIS', 'CLIENTE', 'TEL', 'CODIGO']
 
 def bloq(*args):
 
-    data_block=[]
+    data_block = []
 
-    path=r'NUEVOS'
+    path = r'NUEVOS'
     for f in args:
-        file=f
+        file = f
 
         with open(path + os.sep + file, 'r', encoding='utf-8-sig') as bl,\
             open('RESULTADO_BLOQ.txt', 'w', newline='') as salida:
@@ -35,12 +35,12 @@ def bloq(*args):
             for i in lec:
                 if i[2] == 'BLOQ':
                     if f == 'BLOQUEOS_111.txt':
-                        sis='S111'
+                        sis = 'S111'
                     elif f == 'BLOQUEOS_821.txt':
-                        sis='R821'
+                        sis = 'R821'
                     elif f == 'BLOQUEOS_404.txt':
-                        sis='S404'
-                    data=fecha, sis, i[0], str(i[1]).strip(), i[2]
+                        sis = 'S404'
+                    data = fecha, sis, i[0], str(i[1]).strip(), i[2]
                     data_block.append(data)
 
             for db in data_block:
