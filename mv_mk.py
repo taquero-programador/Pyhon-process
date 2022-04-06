@@ -2,7 +2,7 @@
 
 """
 mv_mk.py: este proceso en un inicio estaba hecho en un batch para win7,
-pero despues de que migraron los equipos a win10 e hicieron "ajustes",
+pero despues de que migraron los equipos a win10 e hicieron "ajustes"
 perdimos muchos permisos, incluso algo tan simple como un batch dejo
 de funcionar sin efectuar algun resultado.
 
