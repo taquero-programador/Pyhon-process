@@ -7,7 +7,7 @@ cargar la informacion a la db, de lo contrario no se iran a los
 servicios correspondientes.
 
 si la cuenta especial esta en el dia anterior me devuelve:
-cuenta_especial_nueva, mora, edo, sis, loc, corte, capita.
+cuenta_especial_nueva, mora, edo, sis, loc, corte, capital.
 en la hoja de excel se puede ver y filtrar, en caso de existir
 una anomalia muy grande se reporta junto con las cuentas especiales
 que no cumplieron los criterios.
