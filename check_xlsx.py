@@ -14,14 +14,7 @@ que no cumplieron los criterios.
 """
 
 import csv
-import datetime
-from datetime import datetime, timedelta
 import xlsxwriter
-
-hoy = datetime.today().strftime("%Y%m%d") 
-mes = hoy[4:6]
-dia = hoy[6:]
-
 
 lista_sim = {}
 mora_sim =  {}
