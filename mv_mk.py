@@ -6,7 +6,7 @@ pero despues de que migraron los equipos a win10 e hicieron "ajustes"
 perdimos muchos permisos, incluso algo tan simple como un batch dejo
 de funcionar sin efectuar algun resultado.
 
-lonque hace este proceso es crear una copia de los archivos ennrutas
+lo que hace este proceso es crear una copia de los archivos ennrutas
 especificas, se añadionuna tarea programada que a cierta hora por la
 madrugada copiaba los archivos.
 """
