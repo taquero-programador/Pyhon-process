@@ -20,21 +20,18 @@ try:
 except (FileExistsError) as direx:
     pass
 
-for file in sorted(glob.glob('RESULTADO_CERT_MTY_*[0-9].TXT')):
-    name_file = file
+def get_csv(file_name):
+    return list(csv.reader(open(file_name, 'r')))
 
-with open('quitar.txt', 'r') as quita:
-    lec = csv.reader(quita, delimiter='|')
-    for l in lec:
-        quitar = [l[0] for l in lec]
+nf = [n for n in sorted(glob.glob('RESULTADO_CERT_MTY_*[0-9].TXT'))]
+name_file = get_csv(nf[0])
+quitar = get_csv('quitar.txt')
 
-with open(name_file, 'r') as cert,\
-	open(os.path.join(path, name_file), 'w', newline='') as cert_file,\
-	open(os.path.join(path, name_file[:-4] + '_BURO.TXT'), 'w', newline='') as cert_buro:
-    lec = csv.reader(cert, delimiter='|')
+with open(os.path.join(path, nf[0]), 'w', newline='') as cert_file,\
+	open(os.path.join(path, nf[0][:-4] + '_BURO.TXT'), 'w', newline='') as cert_buro:
     esc1 = csv.writer(cert_file)
     esc2 = csv.writer(cert_buro)
-    for x in lec:
+    for x in name_file:
         if x[0] in quitar:
             esc1.writerow(x)
             continue
