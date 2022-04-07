@@ -6,7 +6,7 @@ porveniente de sql y otro procesado por py, de ahi obtiene el
 nombre de servicio y el mumero de registros, con chain añade el
 nunero de registros, los resta y les aplica una etiqueta por resultado.
 
-el proceso se ejecutaba en un equipo xon python 3.4, por eso el uso
+el proceso se ejecutaba en un equipo con python 3.4, por eso el uso
 de format() y list(sorted()).
 """
 
@@ -21,21 +21,20 @@ yr, mes, dia = fecha.split('/')
 r = int(dia) - 1
 d_ayer = mes + str(r)
 
-file_local = r'RESULTADOS\RPT_DIALER_PERFORMANCE_' + d_ayer + '_ENERO.csv'
+file_local = r'RESULTADOS\RPT_DIALER_PERFORMANCE_' + d_ayer + '.csv'
 
-for icaro_file in sorted(glob.glob(r'\\192.168.73.23\Tables\NVO72\ICARO_NOC\RPT_DIALER_PERFORMANCE_*[0-9].csv')):
-        infile = icaro_file
+infile = [fn for fn in sorted(glob.glob(r'\\192.168.73.23\Tables\NVO72\ICARO_NOC\RPT_DIALER_PERFORMANCE_*[0-9].csv'))]
 
-with open(infile, 'r') as org:
-    lec = csv.reader(org)
-    icaro_org = list(lec)
+def get_csv(file_name):
+        "retorna una lista del archivo pasado como argumento"
 
-with open(file_local, 'r') as sal:
-    lec=  csv.reader(sal)
-    icaro_sal = list(lec)
+        return list(csv.reader(open(file_name, 'r')))
+
+icaro_org = get_csv(infile)
+icaro_sal = get_csv(file_local)
 
 uno = Counter(n[0] for n in icaro_org)
-dos=  Counter(i[0] for i in icaro_sal)
+dos =  Counter(i[0] for i in icaro_sal)
 
 serv_uno = Counter(n[1] for n in icaro_org)
 serv_dos = Counter(i[1] for i in icaro_sal)
