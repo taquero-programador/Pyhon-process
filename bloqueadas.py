@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
 """
-bloqueadas.py:El proceso toma 3 archivos ubicados en path, en cada registro
-existe un telefonon y un codigo, si ese codigo es 'BLOQ' lo va almacenar en
-data_block que ademas le añade la etiqueta sis segun el tipo de archivo.
-una vez completado, itera sobre data_block y genera un archivo de salida.
+v0.2
+bloqueadas.py: Toma 3 archivos ubicados en path, en cada registrso existe un
+telefono y un codigo, si el codigo es 'BLOQ' lo va a tomar y a escribir en un
+archivo de salida.
 
-Almaceno los resultados en una lista, pues si bien el metodo csv.writer es
-muy bueno, un detalle es que al finalizar una codicion se cierra en automatico
-si permitir escribir los siguientes registros.
+para evitar almacenar los resultado en una lista para luego iterar y escribir en
+el archivo de salida, creo un archivo de salida sin el metodo with, el cual lo
+mantiene activo hasta que termine el bucle, salga del metodo with y lo mande llamar
+con salida.close() para cerrar el archivo.
 """
 
 import csv
@@ -19,18 +20,17 @@ fecha = datetime.today().strftime('%d/%m/%Y')
 header = ['FECHA_EXCLUSION', 'SIS', 'CLIENTE', 'TEL', 'CODIGO']
 
 def bloq(*args):
+    "procesa archivos en path y genera un RESULTADO_BLOQ"
 
-    data_block = []
+    salida = open('RESULTADO_BLOQ.txt', 'w')
+    salida.write((',').join(header) + '\n')
 
     path = r'NUEVOS'
     for f in args:
         file = f
 
-        with open(path + os.sep + file, 'r', encoding='utf-8-sig') as bl,\
-            open('RESULTADO_BLOQ.txt', 'w', newline='') as salida:
+        with open(os.path.join(path, file), 'r', encoding='utf-8-sig') as bl:
             lec=csv.reader(bl)
-            esc=csv.writer(salida)
-            esc.writerow(header)
 
             for i in lec:
                 if i[2] == 'BLOQ':
@@ -41,9 +41,9 @@ def bloq(*args):
                     elif f == 'BLOQUEOS_404.txt':
                         sis = 'S404'
                     data = fecha, sis, i[0], str(i[1]).strip(), i[2]
-                    data_block.append(data)
+                    salida.write((',').join(data) + '\n')
 
-            for db in data_block:
-                esc.writerow(db)
+    salida.close()
 
-bloq('BLOQUEOS_111.txt', 'BLOQUEOS_821.txt', 'BLOQUEOS_404.txt')
+bloq('BLOQUEOS_821.txt', 'BLOQUEOS_404.txt', 'BLOQUEOS_111.txt')
+
