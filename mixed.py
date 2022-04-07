@@ -20,7 +20,6 @@ import csv
 import glob
 
 def get_csv(file_name):
-
 	return list(csv.reader(open(file_name, 'r')))
 
 simulacion = [s[1] for s in get_csv('NUEVA_SIM.txt') if s[3] in '520501']
