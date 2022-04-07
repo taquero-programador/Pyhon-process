@@ -3,7 +3,7 @@
 """
 v0.2
 bloqueadas.py: Toma 3 archivos ubicados en path, en cada registrso existe un
-telefono y un codigo, si el codigo es 'BLOQ' lo va a tomar y a escribir en un
+telefono y codigo, si el codigo es 'BLOQ' lo va a tomar y a escribir en un
 archivo de salida.
 
 para evitar almacenar los resultado en una lista para luego iterar y escribir en
