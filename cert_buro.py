@@ -14,10 +14,11 @@ import csv
 import glob
 import os
 
+path = 'NUEVOS'
 try:
-    os.mkdir('NUEVOS')
+    os.mkdir(path)
 except (FileExistsError) as direx:
-    print(direx)
+    pass
 
 for file in sorted(glob.glob('RESULTADO_CERT_MTY_*[0-9].TXT')):
     name_file = file
@@ -27,15 +28,12 @@ with open('quitar.txt', 'r') as quita:
     for l in lec:
         quitar = [l[0] for l in lec]
 
-cert_file = open(r'NUEVOS' + os.sep + name_file, 'w')
-cert_buro = open(r'NUEVOS' + os.sep + name_file[:-4] + '_BURO' + '.TXT', 'w')
-
 with open(name_file, 'r') as cert,\
-	open(r'NUEVOS' + os.sep + name_file, 'w', newline='') as cert_file,\
-	open(r'NUEVOS' + os.sep + name_file[:-4] + '_BURO.TXT', 'w', newline='') as cert_buro:
+	open(os.path.join(path, name_file), 'w', newline='') as cert_file,\
+	open(os.path.join(path, name_file[:-4] + '_BURO.TXT'), 'w', newline='') as cert_buro:
     lec = csv.reader(cert, delimiter='|')
-	esc1 = csv.writer(cert_file)
-	esc2 = csv.writer(cert_buro)    	
+    esc1 = csv.writer(cert_file)
+    esc2 = csv.writer(cert_buro)
     for x in lec:
         if x[0] in quitar:
             esc1.writerow(x)
