@@ -19,15 +19,14 @@ otra con la etiqueta 'MIXED', todo en un archivo resultado_nregs.csv.
 import csv
 import glob
 
-for nfile in sorted(glob.glob('AUTODLR.S111.CC2.*[0-9].txt')):
-	with open(nfile, 'r') as r1:
-	    rmixed = [x[6:22] for x in r1 if x[0:6] in '520501']
+def get_csv(file_name):
 
-with open(r'NUEVA_SIM.txt', 'r') as sim:
-    lec = csv.reader(sim)
-    simulacion = [s[1] for s in lec if s[3] in '520501']
+	return list(csv.reader(open(file_name, 'r')))
 
-cmix = [n for n in rmixed if n not in simulacion]
+simulacion = [s[1] for s in get_csv('NUEVA_SIM.txt') if s[3] in '520501']
+
+cmix = [x[6:22] for x in sorted(glob.glob(get_csv('AUTODLR.S111.CC2.*[0-9].txt')))
+			if x[0:6] in '520501' and x[6:22] not in simulacion]
 
 with open('resultado_' + str(len(cmix)) + '.csv', 'w', newline='') as file_result:
 	escritor = csv.writer(file_result)
