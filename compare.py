@@ -22,7 +22,6 @@ r = int(dia) - 1
 d_ayer = mes + str(r)
 
 file_local = r'RESULTADOS\RPT_DIALER_PERFORMANCE_' + d_ayer + '.csv'
-
 infile = [fn for fn in sorted(glob.glob(r'\\192.168.73.23\Tables\NVO72\ICARO_NOC\RPT_DIALER_PERFORMANCE_*[0-9].csv'))]
 
 def get_csv(file_name):
@@ -30,7 +29,7 @@ def get_csv(file_name):
 
         return list(csv.reader(open(file_name, 'r')))
 
-icaro_org = get_csv(infile)
+icaro_org = get_csv(infile[0])
 icaro_sal = get_csv(file_local)
 
 uno = Counter(n[0] for n in icaro_org)

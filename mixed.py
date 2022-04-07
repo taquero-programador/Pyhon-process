@@ -23,9 +23,8 @@ def get_csv(file_name):
 	return list(csv.reader(open(file_name, 'r')))
 
 simulacion = [s[1] for s in get_csv('NUEVA_SIM.txt') if s[3] in '520501']
-
-cmix = [x[6:22] for x in sorted(glob.glob(get_csv('AUTODLR.S111.CC2.*[0-9].txt')))
-			if x[0:6] in '520501' and x[6:22] not in simulacion]
+fn = [cm for cm in sorted(glob.glob('AUTODLR.S111.CC2.*[0-9].txt'))]
+cmix = [x[6:22] for x in get_csv(fn[0]) if x[0:6] in '520501' and x[6:22] not in simulacion]
 
 with open('resultado_' + str(len(cmix)) + '.csv', 'w', newline='') as file_result:
 	escritor = csv.writer(file_result)
