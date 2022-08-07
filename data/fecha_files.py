@@ -10,8 +10,7 @@ meses = list(enumerate(['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
          'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'], 1))
 
 
-def fec_import time
-index():
+def index():
     for index in meses:
         if str(index[0]) == mes:
             mff = index[1]
